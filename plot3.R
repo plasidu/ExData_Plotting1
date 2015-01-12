@@ -1,0 +1,8 @@
+data <- read.table('household_power_consumption.txt', sep=";", na.strings="?",skip=66637, nrows=2881)
+datb <- cbind(data, date=strptime(paste(data$V1, data$V2),"%d/%m/%Y %T"))
+with(datb, plot(datb$date, datb$V7, "l", xlab='', ylab='Energy sub metering'))
+with(datb, lines(date, V8, col='red'))
+with(datb, lines(date, V9, col='blue'))
+legend("topright", lty=1, col = c("black","blue", "red"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+dev.copy(png, file='plot3.png')
+dev.off()
